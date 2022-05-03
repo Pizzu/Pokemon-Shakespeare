@@ -3,6 +3,8 @@ import express from "express"
 import morgan from "morgan"
 import helmet from "helmet"
 import cors from "cors"
+// Files
+import api from "./api/index.js"
 
 const app = express()
 
@@ -18,5 +20,7 @@ app.get("/", (req, res) => {
     message: "Welcome to Pokemon Shakespeare 👋"
   });
 });
+
+app.use("/api/v1/", api)
 
 export default app
