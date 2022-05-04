@@ -1,26 +1,10 @@
-import axios from "axios"
+import { fetchPokemonBy } from "../helpers/index.js"
 
 export const getPokemon = async (req, res, next) => {
   const { pokemonName } = req.params
-
   try {
-    // Fetch pokemon
-    const pokemon = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then(res => res.data)
-    const pokemonSpecies = await axios.get(pokemon.species.url).then(res => res.data)
-    const pokemonDescription = pokemonSpecies.flavor_text_entries[0].flavor_text.replace(/[\n\r\f]+/g, ' ')
-  
-    // Translate description
-    const pokemonTranslation = await axios.post("https://api.funtranslations.com/translate/shakespeare.json", 
-      {
-        text: pokemonDescription
-      }
-    ).then(res => res.data)
-
-    // Create response object
-    res.status(200).json({
-      name: pokemon.name,
-      description: pokemonTranslation.contents.translated
-    })
+    const pokemon = await fetchPokemonBy(pokemonName)
+    res.status(200).json({name: pokemon.name, description: pokemon.description})
   } catch (error) {
     // Errors will be handled by an ErrorHandler middleware
     next(error)
