@@ -3,6 +3,9 @@ import express from "express"
 import morgan from "morgan"
 import helmet from "helmet"
 import cors from "cors"
+// Files
+import api from "./api/index.js"
+import { notFound, errorHandler } from "./middleware.js"
 
 const app = express()
 
@@ -18,5 +21,9 @@ app.get("/", (req, res) => {
     message: "Welcome to Pokemon Shakespeare 👋"
   });
 });
+
+app.use("/api/", api)
+app.use(notFound)
+app.use(errorHandler)
 
 export default app
