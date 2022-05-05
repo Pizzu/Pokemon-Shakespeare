@@ -1,9 +1,6 @@
 version: "3.8"
 services:
   express-server:
-    build:
-      dockerfile: Dockerfile
-      context: "./server"
     ports:
       - 5000:5000
     environment:
