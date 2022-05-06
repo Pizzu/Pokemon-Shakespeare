@@ -6,7 +6,7 @@ type SectionLayoutProps = {
 
 const SectionLayout: React.FC<SectionLayoutProps> = ({ children }) => {
   return (
-    <section className="h-screen flex items-center">
+    <section className="min-h-screen flex items-center">
       <div className="container">
         {children}
       </div>
