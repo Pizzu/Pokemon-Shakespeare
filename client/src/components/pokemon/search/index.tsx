@@ -1,10 +1,14 @@
+import { useState } from "react"
 import { Button } from "../../common"
-
+import { PokemonCard } from "../../pokemon"
 const PokemonSearch: React.FC = () => {
+
+  const [showPokemonCard, setShowPokemonCard] = useState<boolean>(false)
 
   const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     console.log("Click")
+    setShowPokemonCard(true)
   }
 
   return (
@@ -18,8 +22,10 @@ const PokemonSearch: React.FC = () => {
           <Button type="submit" className="bg-primary text-white">Search Now</Button>
         </div>
       </form>
+      {
+        <PokemonCard showPokemonCard={showPokemonCard} />
+      }
     </>
-
   )
 }
 
