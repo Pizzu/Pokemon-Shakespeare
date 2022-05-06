@@ -1,14 +1,16 @@
 import { useState } from "react"
 import { Button } from "../../common"
 import { PokemonCard } from "../../pokemon"
+
 const PokemonSearch: React.FC = () => {
 
-  const [showPokemonCard, setShowPokemonCard] = useState<boolean>(false)
+  const [pokemonData, setPokemonData] = useState<boolean>(false)
+  const resetPokemonData = () => setPokemonData(false)
 
   const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     console.log("Click")
-    setShowPokemonCard(true)
+    setPokemonData(true)
   }
 
   return (
@@ -23,7 +25,8 @@ const PokemonSearch: React.FC = () => {
         </div>
       </form>
       {
-        <PokemonCard showPokemonCard={showPokemonCard} />
+        pokemonData &&
+        <PokemonCard pokemonData={pokemonData} resetPokemonData={resetPokemonData} />
       }
     </>
   )

@@ -4,7 +4,7 @@ import { PokemonSearch } from "./components/pokemon";
 
 const App: React.FC = () => {
   return (
-    <main>
+    <main role="main">
       <SectionLayout>
         <div className="grid grid-flow-row gap-10 max-w-3xl mx-auto">
           <Hero>
