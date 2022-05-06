@@ -2,6 +2,8 @@ import { useState } from "react"
 import useSWR from "swr"
 import { SearchForm } from "../../common"
 import { PokemonCard } from "../../pokemon"
+import axios from "axios"
+import { PokemonServerRes } from "../../../types"
 
 const PokemonSearch: React.FC = () => {
   const [pokemonToFetch, setPokemonToFetch] = useState<string | null>(null)
@@ -11,16 +13,16 @@ const PokemonSearch: React.FC = () => {
     setPokemonToFetch(pokemonName)
   }
 
-  const { data, error, isValidating } = useSWR(() =>
+  const { data } = useSWR(() =>
     pokemonToFetch ? `http://localhost:5000/api/pokemon/${pokemonToFetch}` : null,
     async (url) => {
       console.log("I run")
-      return { name: "Pokemon", description: "Des" }
-    }
+      const response: PokemonServerRes = await axios.get(url).then(res => res.data)
+      return response
+    },
+    {shouldRetryOnError: false, revalidateOnFocus: false}
   )
-  console.log(error)
-  console.log(isValidating)
-  
+
   return (
     <>
       <SearchForm fetchPokemon={fetchPokemon} />
