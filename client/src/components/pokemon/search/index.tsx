@@ -1,6 +1,6 @@
 import { useState } from "react"
 import useSWR from "swr"
-import { SearchForm } from "../../common"
+import { ErrorMessage, SearchForm } from "../../common"
 import { PokemonCard } from "../../pokemon"
 import axios from "axios"
 import { PokemonServerRes } from "../../../types"
@@ -8,10 +8,10 @@ import { PokemonServerRes } from "../../../types"
 const PokemonSearch: React.FC = () => {
   const [pokemonToFetch, setPokemonToFetch] = useState<string | null>(null)
 
-  const { data } = useSWR(() =>
+  const { data, error, isValidating } = useSWR(() =>
     pokemonToFetch ? `http://localhost:5000/api/pokemon/${pokemonToFetch}` : null,
     async (url) => {
-      console.log("I run")
+      console.log("ciao")
       const response: PokemonServerRes = await axios.get(url).then(res => res.data)
       return response
     },
@@ -19,7 +19,6 @@ const PokemonSearch: React.FC = () => {
   )
 
   const fetchPokemon = (pokemonName: string) => {
-    console.log(pokemonName)
     setPokemonToFetch(pokemonName)
   }
 
@@ -29,6 +28,10 @@ const PokemonSearch: React.FC = () => {
       {
         data &&
         <PokemonCard pokemonData={data} />
+      }
+      {
+        (error && !isValidating) &&
+        <ErrorMessage />
       }
     </>
   )
