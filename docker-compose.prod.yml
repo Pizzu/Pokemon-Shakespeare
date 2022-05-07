@@ -9,3 +9,9 @@ services:
     environment:
       - NODE_ENV=production
     command: node index.js
+  react-app:
+    build:
+      dockerfile: Dockerfile.prod
+      context: "./client"
+    ports:
+      - 8080:80
