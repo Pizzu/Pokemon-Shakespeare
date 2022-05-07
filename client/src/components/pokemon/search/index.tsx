@@ -8,11 +8,6 @@ import { PokemonServerRes } from "../../../types"
 const PokemonSearch: React.FC = () => {
   const [pokemonToFetch, setPokemonToFetch] = useState<string | null>(null)
 
-  const fetchPokemon = (pokemonName: string) => {
-    console.log(pokemonName)
-    setPokemonToFetch(pokemonName)
-  }
-
   const { data } = useSWR(() =>
     pokemonToFetch ? `http://localhost:5000/api/pokemon/${pokemonToFetch}` : null,
     async (url) => {
@@ -20,8 +15,13 @@ const PokemonSearch: React.FC = () => {
       const response: PokemonServerRes = await axios.get(url).then(res => res.data)
       return response
     },
-    {shouldRetryOnError: false, revalidateOnFocus: false}
+    { shouldRetryOnError: false, revalidateOnFocus: false }
   )
+
+  const fetchPokemon = (pokemonName: string) => {
+    console.log(pokemonName)
+    setPokemonToFetch(pokemonName)
+  }
 
   return (
     <>
