@@ -15,8 +15,8 @@ const SearchForm: React.FC<SearchFormProps> = ({ fetchPokemon }) => {
   })
 
   return (
-    <form onSubmit={onFormSubmit} className="grid grid-cols-7 items-stretch gap-6">
-      <label htmlFor="pokemonName" className="block col-span-5">
+    <form onSubmit={onFormSubmit} className="grid grid-cols-7 items-stretch gap-6 sm:grid-cols-1">
+      <label htmlFor="pokemonName" className="block col-span-5 sm:col-span-1">
         <input
           {...register("pokemonName", { 
             required: "You must enter a pokemon name", 
@@ -26,13 +26,13 @@ const SearchForm: React.FC<SearchFormProps> = ({ fetchPokemon }) => {
             } 
           })}
           type="text"
-          className="h-full px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-lg focus:ring-1"
+          className="text-xl h-full px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-primary focus:ring-primary block w-full rounded-lg focus:ring-1 sm:text-3xl"
           placeholder="Charizard, Bulbasaur, Wartortle ..."
         />
       </label>
       { errors.pokemonName && <p role="alert" className="col-span-full order-1 text-red-500 text-xl">{errors.pokemonName!.message}</p>} 
-      <div className="col-span-2">
-        <Button type="submit" className="bg-primary text-white">Search Now</Button>
+      <div className="col-span-2 sm:col-span-1">
+        <Button type="submit" className="bg-primary text-white sm:w-full">Search Now</Button>
       </div>
     </form>
   )

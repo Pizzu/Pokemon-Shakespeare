@@ -6,7 +6,7 @@ const App: React.FC = () => {
   return (
     <main role="main">
       <SectionLayout>
-        <div className="grid grid-flow-row gap-10 max-w-3xl mx-auto">
+        <div className="grid grid-flow-row gap-10 max-w-3xl mx-auto sm:max-w-6xl">
           <Hero>
             <h1>Pokemon Shakespeare</h1>
             <p>Type on the search field a pokemon name</p>
